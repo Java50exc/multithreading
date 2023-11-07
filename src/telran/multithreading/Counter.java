@@ -1,20 +1,25 @@
 package telran.multithreading;
 
 public class Counter extends Thread {
- private static int counterResource1 = 0;
- private static int counterResource2 = 0;
+ private CounterResource counterResource1;
+ private CounterResource counterResource2;
+
  private int nCounts;
  
- public Counter(int nCounts) {
+ 
+ 
+public Counter(CounterResource counterResource1, CounterResource counterResource2, int nCounts) {
+	this.counterResource1 = counterResource1;
+	this.counterResource2 = counterResource2;
 	this.nCounts = nCounts;
 }
- 
-public static int getCounterResource1() {
-	return counterResource1;
+
+public  int getCounterResource1() {
+	return counterResource1.getCounter();
 }
 
-public static int getCounterResource2() {
-	return counterResource2;
+public  int getCounterResource2() {
+	return counterResource2.getCounter();
 }
 
 @Override
@@ -25,11 +30,15 @@ public static int getCounterResource2() {
 	 }
  }
 private void count2() {
-	counterResource2++;
+	synchronized (counterResource2) {
+		counterResource2.increment();
+	}
 	
 }
  private void count1() {
-	counterResource1++;
+	synchronized (counterResource1) {
+		counterResource1.increment();
+	}
 	
 }
 }

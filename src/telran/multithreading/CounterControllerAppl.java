@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class CounterControllerAppl {
 
 	private static final int N_COUNTERS = 1000;
-	private static final int N_COUNTS = 10000;
+	private static final int N_COUNTS = 100000;
 
 	public static void main(String[] args)throws InterruptedException {
 		Counter[] counters = new Counter[N_COUNTERS];

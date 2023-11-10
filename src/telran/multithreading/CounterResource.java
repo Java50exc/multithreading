@@ -1,11 +1,13 @@
 package telran.multithreading;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class CounterResource {
- int counter;
+ AtomicInteger counter = new AtomicInteger();
  public void increment() {
-	 counter++;
+	 counter.getAndIncrement();
  }
  public int getCounter() {
-	 return counter;
+	 return counter.get();
  }
 }

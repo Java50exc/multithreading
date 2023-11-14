@@ -20,6 +20,6 @@ public void run() {
 		}
 		System.out.printf("%d - step %d\n",runnerId, i);
 	}
-	race.setWinner(runnerId);
+	race.winner.compareAndSet(-1, runnerId);
 }
 }

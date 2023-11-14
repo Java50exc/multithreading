@@ -5,7 +5,10 @@ public class Worker extends Thread {
 	static final Object mutex2=new Object();
 	@Override
 	public void run() {
-		f1();
+		for (int i = 0; i < 100000; i++) {
+			f1();
+			f2();
+		}
 	}
 	private void f1() {
 		/**********Critical section with two shared resources*************************/
@@ -15,14 +18,18 @@ public class Worker extends Thread {
 			}
 		}
 		/************************************************/
-		/************two critical sections with two separate resources******/
-		synchronized (mutex1) {
-			//critical section with resource1
-		}
+		
+		
+	}
+	private void f2() {
+		/**********Critical section with two shared resources*************************/
 		synchronized (mutex2) {
-			//critical section with resource2
+			synchronized (mutex1) {
+				//working with resources
+			}
 		}
-		/*******************************************************************/
+		/************************************************/
+		
 		
 	}
 }

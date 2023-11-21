@@ -13,12 +13,25 @@ public class SenderReceiverAppl {
 		MessageBox messageBox = new MessageBoxString();
 		Sender sender = new Sender(messageBox, N_MESSAGES);
 		sender.start();
-		for(int i = 0; i < N_RECEIVERS; i++) {
-			new Receiver(messageBox).start();
-		}
+		Receiver[] receivers = new Receiver[N_RECEIVERS];
+		startReceivers(messageBox, receivers);
 		sender.join();
-		Thread.sleep(100); //to give all receivers-daemons process all messages FIXME HW #46 should be another logic of stopping receivers
+		stopReceivers(receivers);
 
+	}
+
+	private static void stopReceivers(Receiver[] receivers) {
+		for(Receiver receiver: receivers) {
+			receiver.interrupt();
+		}
+		
+	}
+
+	private static void startReceivers(MessageBox messageBox, Receiver[] receivers) {
+		for(int i = 0; i < N_RECEIVERS; i++) {
+			receivers[i] = new Receiver(messageBox);
+			receivers[i].start();
+		}
 	}
 
 }

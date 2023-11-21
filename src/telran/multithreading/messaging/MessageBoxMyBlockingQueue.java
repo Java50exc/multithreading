@@ -5,8 +5,8 @@ import java.util.concurrent.*;
 /**
  * Message box contains only one string
  */
-public class MessageBoxBlockingQueue implements MessageBox{
-	private BlockingQueue<String> messages = new LinkedBlockingQueue<>(1);
+public class MessageBoxMyBlockingQueue implements MessageBox{
+	private MyBlockingQueue<String> messages = new MyLinkedBlockingQueue<>(1);
 	@Override
 	 public void put(String message)  {
 		try {

@@ -6,13 +6,13 @@ import java.util.concurrent.*;
 import telran.multithreading.dto.Car;
 
 public class Garage {
-private static final int N_WORKERS = 20;
-private static final int PARKING_PLACES = 20;
+private static final int N_WORKERS = 5;
+private static final int PARKING_PLACES = 10;
 private static final int GARAGE_CAPACITY = N_WORKERS + PARKING_PLACES;
 private static final int MODELLING_TIME = 10000;
-private static final int MIN_TIME = 1;
-private static final int MAX_TIME = 2;
-private static final int CAR_COMMING_PROB = 2;
+private static final int MIN_TIME = 60;
+private static final int MAX_TIME = 240;
+private static final int CAR_COMMING_PROB = 10;
 private static int rejectedCars = 0;
 private static int nCars = 0;
 
@@ -50,7 +50,7 @@ private static Car generateCar() {
 	return car;
 }
 
-private static long getRandomNumber(int minTime, int maxTime) {
+private static long getRandomNumber(long minTime, long maxTime) {
 	
 	return ThreadLocalRandom.current().nextLong(minTime, maxTime);
 }
@@ -63,6 +63,7 @@ private static long chance() {
 private static void startWorkers(Worker[] workers, BlockingQueue<Car> cars) {
 	for(int i = 0; i < workers.length; i++) {
 		workers[i] = new Worker(cars);
+		workers[i].start();
 	}
 	
 }

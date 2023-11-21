@@ -10,7 +10,7 @@ public class SenderReceiverAppl {
 	private static final int N_RECEIVERS = 10;
 
 	public static void main(String[] args) throws InterruptedException {
-		MessageBox messageBox = new MessageBoxString();
+		MessageBox messageBox = new MessageBoxStringCondition();
 		Sender sender = new Sender(messageBox, N_MESSAGES);
 		sender.start();
 		Receiver[] receivers = new Receiver[N_RECEIVERS];

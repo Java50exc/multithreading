@@ -13,7 +13,7 @@ public interface MyBlockingQueue<T> {
 	T remove();
 	T poll();
 	T take() throws InterruptedException;
-	T poll(long timeout, TimeUnit unit);
+	T poll(long timeout, TimeUnit unit) throws InterruptedException;
 	T element();
 	T peek();
 }

@@ -8,19 +8,14 @@ public class MyDeadlock {
 		
 		Thread t1 = new Thread(() -> {	
 			synchronized (i1) {	
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {}
-				synchronized (i2) {}
-				
+				try { Thread.sleep(100); } catch (InterruptedException e) {}
+				synchronized (i2) {}	
 			}
 		});
 		
 		Thread t2 = new Thread(() -> {
 			synchronized (i2) {	
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {}
+				try { Thread.sleep(100); } catch (InterruptedException e) {}
 				synchronized (i1) {}	
 			}
 		});

@@ -21,15 +21,14 @@ public class Barrier {
 	 * and only when continues to run.
 	 */
 	public synchronized void await() {
-		if((++arrivedCount) == threadsCount) {
-			this.notifyAll();
-			this.arrivedCount = 0;
-		} else {
-			try {
+		arrivedCount++;
+	
+		while(arrivedCount < threadsCount) {
+			try {	
 				this.wait();
 			} catch (InterruptedException e) {}	
 		}
-		
+		this.notifyAll();
 	}
 
 	/**

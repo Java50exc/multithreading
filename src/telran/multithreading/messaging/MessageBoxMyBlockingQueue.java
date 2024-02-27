@@ -23,7 +23,7 @@ public class MessageBoxMyBlockingQueue implements MessageBox{
 	}
 
 	@Override
-	synchronized public String pull() {
+	public String pull() {
 		
 		
 		return messages.poll();
